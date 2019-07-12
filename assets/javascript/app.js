@@ -1,6 +1,6 @@
 // Initial values
 
-var counter = 5;
+var counter = 15;
 var currentQuestion = 0;
 var score = 0;
 var loss = 0;
@@ -30,7 +30,8 @@ function timeUp() {
 
     loss++;
 
-    nextQuestion();
+    preloadImage('lost');
+    setTimeout(nextQuestion, 3000);
 }
 
 
@@ -48,11 +49,11 @@ function countDown() {
 // Display the question and the choices together in the browser
 
 function loadQuestion() {
-    counter = 5;
+    counter = 15;
     timer = setInterval(countDown, 1000);
 
-    var question = gameQuestions[currentQuestion].question;
-    var answers = gameQuestions[currentQuestion].answers;
+    var question = gameQuestions[currentQuestion].question; //
+    var answers = gameQuestions[currentQuestion].answers; //
 
     $('#time').html('Timer: ' + counter);
     $('#game').html(`
@@ -80,14 +81,16 @@ $(document).on("click", ".answers", function() {
     var selectedAnswer = $(this).attr('data-answer');
     var correctAnswer = gameQuestions[currentQuestion].correctAnswer;
 
-    if (selectedAnswer === correctAnswer) {
+    if (correctAnswer === selectedAnswer) {
         score++;    
-        nextQuestion();
+        preloadImage('win');
+        setTimeout(nextQuestion, 3000);
         console.log("Winner");    
     } else {
         loss++;
-        nextQuestion();
-        console.log("Missed Shot!")
+        preloadImage('lost');
+        setTimeout(nextQuestion, 3000);
+        console.log("Missed Shot!");
     }
 
     console.log("what", selectedAnswer);
@@ -106,7 +109,7 @@ function displayResult() {
 }
 
 $(document).on('click', '#reset', function() {
-     counter = 5;
+     counter = 15;
      currentQuestion = 0;
      score = 0;
      loss = 0;
@@ -124,7 +127,45 @@ function loadRemainingQuestions() {
 
 }
 
+function randomImage(images) {
+    var random = Math.floor(Math.random() * images.length);
+    var randomImage = images[random];
+    return randomImage;
+
+}
+
+// randomImage()
 
 
 
-loadQuestion();
+// Display a unny giphy for correct/wrong answers
+
+function preloadImage(status) {
+    var correctAnswer = gameQuestions[currentQuestion].correctAnswer;
+
+    if (status === 'win') {
+        $('#game').html(`
+            <p class="preload-image">Good Job, you scored on that try</p>
+            <p class="preload-image">The correct answer is <b>${correctAnswer}</b></p>
+            <img src="${randomImage(winImages)}"/>
+        `)
+    } else {
+        $('#game').html(`
+            <p class="preload-image">The correct answer was ${correctAnswer}</p>
+            <p class="preload-image">You are "NOT" a clutch player</p>
+            <img src="${randomImage(lossImages)}"/>
+        `);
+
+    }
+
+}
+
+
+
+
+
+$('#start').click(function() {
+    $('#start').remove();
+    $('#time').html(counter);
+    loadQuestion();
+});;
