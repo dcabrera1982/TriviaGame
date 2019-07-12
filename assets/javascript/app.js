@@ -6,6 +6,10 @@ var score = 0;
 var loss = 0;
 var timer;
 
+// Start 30 second timer for the user to respond or choose an answer to each question
+
+
+
 
 // Display the question and the choices together in the browser
 
@@ -15,8 +19,10 @@ function loadQuestion() {
     var answers = gameQuestions[currentQuestion].answers;
 
     $('#time').html('Timer: ' + counter);
-    $('#game').html('<h4>' + question + '</h4>');
-
+    $('#game').html(`
+    <h4>${question}</h4>
+    ${loadAnswers(answers)}
+    `);
 }
 
 function loadAnswers(answers) {
