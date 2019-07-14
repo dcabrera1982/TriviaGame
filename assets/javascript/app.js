@@ -16,9 +16,9 @@ function nextQuestion() {
         console.log("Game Over");
         displayResult();
     } else {
-    currentQuestion++;
-    loadQuestion();
-}
+        currentQuestion++;
+        loadQuestion();
+    }
 
 }
 
@@ -76,16 +76,16 @@ function loadAnswers(answers) {
 
 // Go to the next question when either the correct/wrong answer have been selected
 
-$(document).on("click", ".answers", function() {
+$(document).on('click', '.answers', function () {
     clearInterval(timer);
     var selectedAnswer = $(this).attr('data-answer');
     var correctAnswer = gameQuestions[currentQuestion].correctAnswer;
 
     if (correctAnswer === selectedAnswer) {
-        score++;    
+        score++;
         preloadImage('win');
         setTimeout(nextQuestion, 3000);
-        console.log("Winner");    
+        console.log("Winner");
     } else {
         loss++;
         preloadImage('lost');
@@ -108,14 +108,14 @@ function displayResult() {
     $('#game').html(result);
 }
 
-$(document).on('click', '#reset', function() {
-     counter = 15;
-     currentQuestion = 0;
-     score = 0;
-     loss = 0;
-     timer = null;
+$(document).on('click', '#reset', function () {
+    counter = 15;
+    currentQuestion = 0;
+    score = 0;
+    loss = 0;
+    timer = null;
 
-     loadQuestion();
+    loadQuestion();
 });
 
 
@@ -138,7 +138,7 @@ function randomImage(images) {
 
 
 
-// Display a unny giphy for correct/wrong answers
+// Display a funny giphy for correct/wrong answers
 
 function preloadImage(status) {
     var correctAnswer = gameQuestions[currentQuestion].correctAnswer;
@@ -164,7 +164,7 @@ function preloadImage(status) {
 
 
 
-$('#start').click(function() {
+$('#start').click(function () {
     $('#start').remove();
     $('#time').html(counter);
     loadQuestion();

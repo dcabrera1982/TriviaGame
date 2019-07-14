@@ -1,0 +1,29 @@
+body {
+    background-image: url("logo.jpg");
+    
+}
+
+.jumbotron {
+    background-image: url("bball-gods.jpg");
+    
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
+.center {
+    text-align: center;
+}
+
+#time, #game {
+    color: white;
+}
+
+h1, h3 {
+    color: white;
+    background-color: black;
+    margin-right: 380px;
+    margin-left: 380px;
+            
+}

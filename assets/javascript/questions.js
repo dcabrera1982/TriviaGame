@@ -38,7 +38,7 @@ var gameQuestions = [
                 "Chicago Bulls"
             ],
             correctAnswer: "Boston Celtics"
-        }
+        },
         {
             question: "Who was the youngest player to score 10,000 points in the NBA?",
             answers: [
